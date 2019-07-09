@@ -21,7 +21,7 @@ public class GroupOfCards
     private ArrayList <Card> cards;
     private int size;//the size of the grouping
     
-    public GroupOfCards(int givenSize)
+    public GroupOfCards(int givenSize, ArrayList<Card> deck)
     {
         size = givenSize;
     }
@@ -54,4 +54,4 @@ public class GroupOfCards
         size = givenSize;
     }
     
-}//end class
+}

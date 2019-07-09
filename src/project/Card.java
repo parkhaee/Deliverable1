@@ -12,7 +12,16 @@ package project;
  * @author megha, 2019
  */
 public abstract class Card 
-{
+{   
+    protected CardRank rank;
+    protected CardSuit suit;
+    protected int value;
+    
+    Card(CardRank rank, CardSuit suit, int value) {
+        this.rank = rank;
+        this.suit = suit;
+        this.value = value;
+    }
     //default modifier for child classes
     
     /**
@@ -20,7 +29,6 @@ public abstract class Card
      * @return a String representation of a card. Could be an UNO card, a regular playing card etc.
      */
     
-    @Override
     public abstract String toString();
     
 }
