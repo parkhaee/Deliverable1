@@ -10,12 +10,14 @@ import java.util.ArrayList;
  *
  * @author hollands251
  */
-public class WarStart {
-    public static void main(String[] args) {
-        System.out.println("war... war never changes");
-        Player player = new Player("player", new ArrayList<Card>(52));
-        Player comp = new Player("comp", new ArrayList<Card>(52));
-        GameSetup game = new GameSetup(player, comp);
-        game.runGame();
-    }
+public class WarStart
+{
+   public static void main (String[] args)
+   {
+      System.out.println("war... war never changes");
+      Player player = new Player("player", new ArrayList<PlayingCard>(52));
+      Player comp = new Player("comp", new ArrayList<PlayingCard>(52));
+      GameSetup game = new GameSetup(player, comp);
+      game.runGame();
+   }
 }
