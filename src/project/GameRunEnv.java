@@ -6,6 +6,7 @@
 package project;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 /**
  * The class that models your game. You should create a more specific
@@ -67,7 +68,7 @@ public class GameRunEnv
       compDrawnCard = this.players.get(1).getDeck().get(cardNum);
    }
 
-   public Player compare ()
+   public Player compare()
    {
       // checks the higher card and return player
       if (playerDrawnCard.value > compDrawnCard.value) {
@@ -87,6 +88,8 @@ public class GameRunEnv
    {
       while (gameOn) {
          drawCard(0);
+         shuffle(players.get(0));
+         shuffle(players.get(1));
 
          System.out.printf("%s vs. %s\n", playerDrawnCard.rank, compDrawnCard.rank);
          //gives winner both cards (adds to end of list)
@@ -94,7 +97,7 @@ public class GameRunEnv
             compare().getDeck().add(compDrawnCard);
             compare().getDeck().add(playerDrawnCard);
             System.out.printf("%s wins this hand\n", compare().getPlayerID());
-            System.out.printf("They won the %s of %s\n", compare().getDeck().get(0).rank, compare().getDeck().get(0).suit);
+            System.out.printf("They won the %s of %s\n", loser.getDeck().get(0).rank, loser.getDeck().get(0).suit);
             //removes first card in deck of each player 
             this.players.get(0).getDeck().remove(0);
             this.players.get(1).getDeck().remove(0);
@@ -125,35 +128,117 @@ public class GameRunEnv
       int cardToDraw = _cardToDraw; //how far into deck to draw card from
 
       System.out.println("WAR");
-      drawCard(cardToDraw); // draws next card
+      if (players.get(0).getDeck().size() > cardToDraw && players.get(1).getDeck().size() > cardToDraw) {
+          drawCard(cardToDraw); // draws next card
+      } else {
+          System.out.println("not enough cards");
+      }
+      
 
       if (compare() != null) {
          compare().getDeck().add(compare().getDeck().get(0));
          compare().getDeck().remove(0);
-         compare().getDeck().add(loser.getDeck().get(0));
-         compare().getDeck().add(loser.getDeck().get(1));
-         compare().getDeck().add(loser.getDeck().get(2));
-         compare().getDeck().add(loser.getDeck().get(3));
-
-         loser.getDeck().remove(0);
-         loser.getDeck().remove(1);
-         loser.getDeck().remove(2);
-         loser.getDeck().remove(3);
+//         compare().getDeck().add(loser.getDeck().get(0));
+//         compare().getDeck().add(loser.getDeck().get(1));
+//         compare().getDeck().add(loser.getDeck().get(2));
+//         compare().getDeck().add(loser.getDeck().get(3));
+         
+         if (loser.getDeck().size() > 1) {
+             
+             compare().getDeck().add(loser.getDeck().get(0));
+             
+             loser.getDeck().remove(0);
+             
+             System.out.printf("%s wins this hand\n", compare().getPlayerID());
+             System.out.printf("They won the %s of %s,\n", compare().getDeck().get(0).rank, compare().getDeck().get(0).suit);
+             
+         } else if (loser.getDeck().size() > 2) {
+             
+            compare().getDeck().add(loser.getDeck().get(0));
+            compare().getDeck().add(loser.getDeck().get(1));
+             
+            loser.getDeck().remove(0);
+            loser.getDeck().remove(1);
+            
+            System.out.printf("%s wins this hand\n", compare().getPlayerID());
+            System.out.printf("They won the %s of %s,\n", compare().getDeck().get(0).rank, compare().getDeck().get(0).suit);
+            System.out.printf(" %s of %s,\n", compare().getDeck().get(1).rank, compare().getDeck().get(1).suit);
+             
+         } else if (loser.getDeck().size() > 3) {
+             
+            compare().getDeck().add(loser.getDeck().get(0));
+            compare().getDeck().add(loser.getDeck().get(1));
+            compare().getDeck().add(loser.getDeck().get(2));
+          
+            loser.getDeck().remove(0);
+            loser.getDeck().remove(1);
+            loser.getDeck().remove(2);
+            
+            System.out.printf("%s wins this hand\n", compare().getPlayerID());
+            System.out.printf("They won the %s of %s,\n", compare().getDeck().get(0).rank, compare().getDeck().get(0).suit);
+            System.out.printf(" %s of %s,\n", compare().getDeck().get(1).rank, compare().getDeck().get(1).suit);
+            System.out.printf("%s of %s,\n", compare().getDeck().get(2).rank, compare().getDeck().get(2).suit);
+          
+         } else if (loser.getDeck().size() >= 4) {
+             
+            compare().getDeck().add(loser.getDeck().get(0));
+            compare().getDeck().add(loser.getDeck().get(1));
+            compare().getDeck().add(loser.getDeck().get(2));
+            compare().getDeck().add(loser.getDeck().get(3));
+             
+            loser.getDeck().remove(0);
+            loser.getDeck().remove(1);
+            loser.getDeck().remove(2);
+            loser.getDeck().remove(3);
+            
+            System.out.printf("%s wins this hand\n", compare().getPlayerID());
+            System.out.printf("They won the %s of %s,\n", compare().getDeck().get(0).rank, compare().getDeck().get(0).suit);
+            System.out.printf(" %s of %s,\n", compare().getDeck().get(1).rank, compare().getDeck().get(1).suit);
+            System.out.printf("%s of %s,\n", compare().getDeck().get(2).rank, compare().getDeck().get(2).suit);
+            System.out.printf("and the %s of %s.\n", compare().getDeck().get(0).rank, compare().getDeck().get(0).suit);
+             
+         }
 
          this.players.get(0).getDeck().remove(0);
          this.players.get(1).getDeck().remove(0);
 
-
-         System.out.printf("%s wins this hand\n", compare().getPlayerID());
-         System.out.printf("They won the %s of %s,\n", compare().getDeck().get(0).rank, compare().getDeck().get(0).suit);
-         System.out.printf(" %s of %s,\n", compare().getDeck().get(1).rank, compare().getDeck().get(1).suit);
-         System.out.printf("%s of %s,\n", compare().getDeck().get(2).rank, compare().getDeck().get(2).suit);
-         System.out.printf("and the %s of %s.\n", compare().getDeck().get(0).rank, compare().getDeck().get(0).suit);
       }
       else {
-         cardToDraw++;
-         war(cardToDraw);
+          staleMate();
       }
+      
+   }
+   
+   public void shuffle(Player p)
+   {
+      Random rand = new Random();
+
+      int limit = rand.nextInt(1000);
+      int shuffleLimit = limit + 100;
+      int i = 0;
+
+      while (i < shuffleLimit) {
+
+         int r1 = rand.nextInt(p.getDeck().size());
+         int r2 = rand.nextInt(p.getDeck().size());
+
+         PlayingCard hold1 = p.getDeck().get(r1);
+         PlayingCard hold2 = p.getDeck().get(r2);
+         p.getDeck().set(r2, hold1);
+         p.getDeck().set(r1, hold2);
+
+         i++;
+      }
+
+   }
+   
+   public void staleMate() {
+       
+       System.out.println("WAR");
+       gameOn = false;
+       System.out.println("Two Wars! StaleMate!");
+       winner = null;
+       
    }
 
 }
