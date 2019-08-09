@@ -101,9 +101,7 @@ public class GameRunEnv
             //removes first card in deck of each player 
             this.players.get(0).getDeck().remove(0);
             this.players.get(1).getDeck().remove(0);
-
-            System.out.println(this.players.get(0).getDeck().size()); //To be removed (for debugging)
-            System.out.println(this.players.get(1).getDeck().size());
+            
          }
          else {
             war(1); //if tie than calls war method
