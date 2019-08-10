@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package project;
+import static org.junit.Assert.assertEquals;
 import org.junit.Test;
 /**
  *
